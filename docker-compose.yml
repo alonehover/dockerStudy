@@ -12,6 +12,7 @@ services:
     volumes:
       - ./php-fpm/php56.ini:/usr/local/etc/php/php.ini
       - ../:/usr/share/nginx/html
+      - ./log/project:/var/log/project
     extra_hosts:
       - "dockerhost:10.0.75.1"
     networks:
@@ -24,7 +25,7 @@ services:
       - "443:443"
     volumes:
       - ../:/usr/share/nginx/html
-      - ./nginx/log:/var/log/nginx      
+      - ./log/nginx:/var/log/nginx      
       - ./nginx/conf.d/:/etc/nginx/conf.d/
     depends_on:
       - php-fpm
@@ -36,7 +37,10 @@ services:
     ports:
       - "6379:6379"
     volumes:
-      - "./redis/data:/data:rw"
-      - "./redis/redis.conf:/usr/local/etc/redis/redis.conf"
+      - "./data/redis:/data:rw"
     command: redis-server /usr/local/etc/redis/redis.conf
+    depends_on:
+      - php-fpm
+    networks:
+        - backend
 

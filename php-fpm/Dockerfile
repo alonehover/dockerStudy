@@ -12,12 +12,13 @@ RUN apt-get update && \
         libssl-dev \
         libmcrypt-dev
 
-RUN docker-php-ext-install mcrypt
+RUN docker-php-ext-install \
+    mcrypt \
+    sockets \
+    bcmath
 
 RUN docker-php-ext-install mysqli \
     && docker-php-ext-install pdo_mysql
-
-RUN docker-php-ext-install pdo_pgsql
 
 RUN docker-php-ext-install gd && \
     docker-php-ext-configure gd \
