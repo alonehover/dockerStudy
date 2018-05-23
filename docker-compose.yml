@@ -38,7 +38,7 @@ services:
       - "6379:6379"
     volumes:
       - "./data/redis:/data:rw"
-    command: redis-server /usr/local/etc/redis/redis.conf
+    command: redis-server
     depends_on:
       - php-fpm
     networks:
