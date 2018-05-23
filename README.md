@@ -1,0 +1,5 @@
+# dockerStudy
+
+```
+docker-compose up
+```
