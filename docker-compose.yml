@@ -14,9 +14,9 @@ services:
       - ${APP_CODE_PATH_ORIGIN}:${APP_CODE_PATH_CONTAINER}
       - ${LOG_PATH_ORIGIN}:${LOG_PATH_CONTAINER}
     expose:
-      - "9000" 
-    extra_hosts:
-      - "dockerhost:${DOCKER_HOST_IP}"
+      - "9000"
+    links: 
+      - redis
     networks:
       - backend
   nginx:
@@ -38,12 +38,11 @@ services:
     image: redis:latest
     container_name: redis
     ports:
-      - "${REDIS_PORT}:6379"
+      - "6379:6379"
     volumes:
-      - "${REDIS_DATA_PATH}/redis:/data:rw"
-    command: redis-server
-    depends_on:
-      - php-fpm
+      - "${REDIS_DATA_PATH}/redis:/data"
+      - "./redis/redis.conf:/usr/local/etc/redis/redis.conf"
+    command: redis-server /usr/local/etc/redis/redis.conf
     networks:
       - backend
 
