@@ -6,6 +6,7 @@ networks:
 services:
   php-fpm:
     build: ./php-fpm
+    image: php56:v1
     container_name: php-fpm
     ports:
       - "9000:9000" 
