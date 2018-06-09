@@ -1,6 +1,6 @@
 FROM php:5.6-fpm
 
-LABEL maintainer=alonehover
+LABEL maintainer="Alonehover"
 
 RUN apt-get update && \
     apt-get install -y --no-install-recommends \
